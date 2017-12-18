@@ -5,7 +5,7 @@ import {
   ScrollView,
   View
 } from 'react-native';
-import {Calendar} from 'react-native-calendars';
+import { Calendar } from 'react-native-calendars';
 
 export default class CalendarsScreen extends Component {
   constructor(props) {
@@ -17,6 +17,15 @@ export default class CalendarsScreen extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
+        <Text style={styles.text}>Calendar With enabledDates</Text>
+          <Calendar
+            onDayPress={this.onDayPress}
+            style={styles.calendar}
+            hideExtraDays
+            markedDates={{[this.state.selected]: {selected: true}}}
+            enabledDates={['2017-12-19', '2017-12-21', '2017-12-23', '2017-12-26', '2017-12-27', '2017-12-29']}
+            disabledByDefault
+          />
         <Text style={styles.text}>Calendar with selectable date and arrows</Text>
         <Calendar
           onDayPress={this.onDayPress}

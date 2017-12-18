@@ -136,10 +136,19 @@ class Calendar extends Component {
   }
 
   renderDay(day, id) {
+    const dayString = day.toString('yyyy-MM-dd');
     const minDate = parseDate(this.props.minDate);
     const maxDate = parseDate(this.props.maxDate);
     let state = '';
-    if (this.props.disabledByDefault) {
+    let enabledArray = [];
+
+    if (this.props.enabledDates) {
+      this.props.enabledDates.map(elem => {
+        enabledArray.push(elem);
+      });
+    }
+
+    if (this.props.disabledByDefault && !enabledArray.includes(dayString)) {
       state = 'disabled';
     } else if ((minDate && !dateutils.isGTE(day, minDate)) || (maxDate && !dateutils.isLTE(day, maxDate))) {
       state = 'disabled';
